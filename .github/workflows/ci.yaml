@@ -38,16 +38,20 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
-    
-    - name: Install golangci-lint
+
+    - name: Set up Go 1.22
+      uses: actions/setup-go@v2
+      with:
+        go-version: 1.22
+
+    - name: Install golangci-lint v1.59.1
       run: |
-        curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s latest
-        export PATH=$PATH:$(pwd)/bin
+        curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s v1.59.1
+        echo "$(pwd)/bin" >> $GITHUB_PATH
 
     - name: Run golangci-lint
-      uses: golangci/golangci-lint-action@v6
-      with:
-        version: v1.59.1
+      run: golangci-lint run
+
   
   push:
     runs-on: ubuntu-latest
