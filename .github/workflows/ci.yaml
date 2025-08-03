@@ -73,4 +73,4 @@ jobs:
           git config --local user.email "rakeshdatti05@gmail.com"
           git add helm/go-web-app-chart/values.yaml
           git commit -m "Update image tag in helm chart"
-          git push 
+          git push origin main
